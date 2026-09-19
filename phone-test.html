@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>ProductForge AI</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;background:#09090d;color:#fff;font-family:Arial,sans-serif}
+main{max-width:520px;margin:auto;padding:20px}
+h1{margin-bottom:4px}
+.sub{color:#aaa;margin-bottom:25px}
+.card{background:#15151d;border:1px solid #292934;border-radius:18px;padding:16px;margin-bottom:15px}
+h2{font-size:18px}
+.upload{display:block;border:2px dashed #555;border-radius:15px;padding:30px 15px;text-align:center;color:#bbb}
+input{display:none}
+img{width:100%;margin-top:15px;border-radius:14px;display:none}
+textarea{width:100%;height:110px;background:#0d0d13;color:white;border:1px solid #444;border-radius:12px;padding:12px;font-size:15px}
+button{width:100%;padding:15px;border:0;border-radius:12px;margin-top:12px;font-weight:bold;font-size:16px}
+.forge{background:white;color:#09090d}
+.option{background:#22222c;color:white;border:1px solid #444}
+#status{display:none;margin-top:15px;padding:15px;border-radius:12px;background:#101018;color:#ccc}
+</style>
+</head>
+
+<body>
+<main>
+
+<h1>ProductForge AI</h1>
+<div class="sub">AI Product Design Studio</div>
+
+<div class="card">
+<h2>📸 1. Upload your product</h2>
+
+<label class="upload" for="photo">
+Tap here to upload your grill photo
+<br><br>
+📷 Camera / Gallery
+</label>
+
+<input id="photo" type="file" accept="image/*">
+<img id="preview">
+</div>
+
+<div class="card">
+<h2>✏️ 2. Describe your idea</h2>
+
+<textarea id="idea" placeholder="Tell ProductForge what you want to create...
+
+Example:
+Create a luxury iced-out grill with larger diamonds, white gold and a custom pattern."></textarea>
+
+<button class="option" onclick="add('Luxury iced-out design')">💎 Luxury</button>
+<button class="option" onclick="add('Custom gold design')">🥇 Gold</button>
+<button class="option" onclick="add('Modern clean design')">✨ Modern</button>
+<button class="option" onclick="add('Aggressive custom design')">🔥 Custom</button>
+</div>
+
+<div class="card">
+<h2>🎨 3. Choose concepts</h2>
+
+<button class="option" onclick="count=2">Generate 2 Concepts</button>
+<button class="option" onclick="count=4">Generate 4 Concepts</button>
+<button class="option" onclick="count=6">Generate 6 Concepts</button>
+</div>
+
+<div class="card">
+<h2>🚀 4. Develop the product</h2>
+
+<p style="color:#aaa">
+Your reference image and design instructions will eventually be sent to the ProductForge AI engine.
+</p>
+
+<button class="forge" onclick="forge()">FORGE CONCEPTS ✦</button>
+
+<div id="status"></div>
+</div>
+
+</main>
+
+<script>
+let count=2;
+
+function add(text){
+document.getElementById("idea").value +=
+(document.getElementById("idea").value ? " " : "") + text;
+}
+
+document.getElementById("photo").onchange=function(){
+let file=this.files[0];
+if(!file)return;
+
+let image=document.getElementById("preview");
+image.src=URL.createObjectURL(file);
+image.style.display="block";
+};
+
+function forge(){
+let file=document.getElementById("photo").files[0];
+let idea=document.getElementById("idea").value;
+let status=document.getElementById("status");
+
+status.style.display="block";
+
+if(!file){
+status.innerHTML="⚠️ Please upload your grill photo first.";
+return;
+}
+
+status.innerHTML=
+"✅ Product image received<br><br>"+
+"✅ Design instructions received<br><br>"+
+"🎨 "+count+" concepts selected<br><br>"+
+"<b>ProductForge AI pipeline ready.</b><br><br>"+
+"Next development stage: connect this screen to the real AI image-generation backend.";
+}
+</script>
+
+</body>
+</html>
